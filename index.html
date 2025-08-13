@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronomique | Premium Dining</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #c19d56;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f8f8;
+            --gray-color: #444;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background: #a88548;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        /* Header & Banner */
+        .header {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        .logo {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 10;
+            width: 120px;
+        }
+
+        .logo img {
+            width: 100%;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            max-width: 800px;
+        }
+
+        .banner-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .banner-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        /* Categories */
+        .categories {
+            padding: 80px 0 40px;
+            background: white;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--dark-color);
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding-bottom: 80px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .menu-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-item:hover .menu-img img {
+            transform: scale(1.1);
+        }
+
+        .menu-content {
+            padding: 20px;
+        }
+
+        .menu-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .menu-title h3 {
+            font-size: 1.4rem;
+        }
+
+        .price {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .menu-desc {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .more-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-left: auto;
+            transition: var(--transition);
+        }
+
+        .more-btn:hover {
+            background: var(--dark-color);
+            transform: rotate(90deg);
+        }
+
+        /* Popup */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s;
+        }
+
+        .popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .popup.active .popup-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .popup-header {
+            background: var(--dark-color);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        .popup-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .popup-img {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .popup-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .popup-details h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .popup-price {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .popup-desc {
+            margin-bottom: 25px;
+            color: var(--gray-color);
+            line-height: 1.8;
+        }
+
+        .features {
+            margin-top: 20px;
+        }
+
+        .features h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .features h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feature-icon {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            color: #aaa;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .popup-body {
+                grid-template-columns: 1fr;
+            }
+            
+            .popup-img {
+                height: 250px;
+            }
+            
+            .banner-content h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .banner-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .banner-content p {
+                font-size: 1.2rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 80%;
+                max-width: 300px;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .logo {
+                width: 90px;
+                top: 20px;
+                left: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .banner-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .banner-content p {
+                font-size: 1rem;
+            }
+            
+            .popup-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Video Banner -->
+    <header class="header">
+        <div class="video-container">
+            <video class="video-bg" autoplay muted loop>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-restaurant-scene-of-the-chef-preparing-the-food-34672-large.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        
+        <div class="logo">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCAxMjAgNjAiPjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTAgMTVMNjAgNTAgMTEwIDE1IiBzdHJva2U9IiNjMTlkNTYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTI1IDM1TDU1IDUgOTUgMzUiIHN0cm9rZT0iI2MxOWQ1NiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=" alt="Gastronomique Logo">
+        </div>
+        
+        <div class="banner-content">
+            <h1>Gastronomique</h1>
+            <p>Exquisite cuisine crafted with passion and premium ingredients</p>
+            <a href="#menu" class="btn">Explore Our Menu</a>
+        </div>
+    </header>
+    
+    <!-- Menu Section -->
+    <section id="menu" class="categories">
+        <div class="container">
+            <h2 class="section-title">Our Culinary Offerings</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-category="starters">Starters</button>
+                <button class="tab-btn" data-category="main">Main Course</button>
+                <button class="tab-btn" data-category="drinks">Drinks</button>
+                <button class="tab-btn" data-category="desserts">Desserts</button>
+            </div>
+            
+            <div class="menu-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Gastronomique</h3>
+            <p>123 Culinary Avenue, Foodie District, 10001</p>
+            <p>Reservations: (123) 456-7890</p>
+            <p>&copy; 2023 Gastronomique. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Popup -->
+    <div class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3 class="popup-title">Dish Details</h3>
+                <button class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="popup-body">
+                <div class="popup-img">
+                    <img id="popup-img" src="" alt="Food Item">
+                </div>
+                <div class="popup-details">
+                    <h2 id="popup-title"></h2>
+                    <span id="popup-price" class="popup-price"></span>
+                    <p id="popup-desc" class="popup-desc"></p>
+                    <div class="features">
+                        <h3>Features</h3>
+                        <div id="popup-features"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Menu data
+        const menuData = {
+            starters: [
+                {
+                    id: 1,
+                    title: "Truffle Arancini",
+                    price: "$12.95",
+                    image: "https://images.unsplash.com/photo-1626082927389-6cd097cee6a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Crispy risotto balls with black truffle and melted mozzarella",
+                    longDesc: "Our signature arancini features creamy Arborio rice infused with black truffle, stuffed with mozzarella, coated in panko breadcrumbs, and fried to golden perfection. Served with a truffle aioli dipping sauce that complements the earthy flavors.",
+                    features: ["Fresh Ingredients", "Vegetarian Option", "Signature Dish", "Serves 2-3"]
+                },
+                {
+                    id: 2,
+                    title: "Seared Scallops",
+                    price: "$16.50",
+                    image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Atlantic scallops with cauliflower puree and caviar",
+                    longDesc: "Perfectly seared jumbo scallops served on a bed of silky cauliflower puree, topped with premium caviar and microgreens. Finished with a drizzle of lemon beurre blanc for a bright, balanced flavor profile.",
+                    features: ["Fresh Seafood", "Gluten-Free", "Low Carb", "Chef's Recommendation"]
+                },
+                {
+                    id: 3,
+                    title: "Burrata & Heirloom Tomatoes",
+                    price: "$14.25",
+                    image: "https://images.unsplash.com/photo-1556911220-ef412ae179a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Creamy burrata with seasonal tomatoes and basil oil",
+                    shortDesc: "Creamy burrata with seasonal tomatoes and basil oil",
+                    longDesc: "Fresh, creamy burrata cheese served with a colorful assortment of heirloom tomatoes, drizzled with house-made basil oil, aged balsamic reduction, and sprinkled with flaky sea salt. Accompanied by grilled artisan bread.",
+                    features: ["Vegetarian", "Fresh Ingredients", "Seasonal", "Shareable"]
+                },
+                {
+                    id: 4,
+                    title: "Duck Confit Spring Rolls",
+                    price: "$13.95",
+                    image: "https://images.unsplash.com/photo-1582281298055-e25b84a30b0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Crispy rolls with tender duck and hoisin dipping sauce",
+                    longDesc: "Shredded duck confit combined with vegetables and spices, wrapped in rice paper and fried until crispy. Served with our special hoisin-peanut dipping sauce and pickled vegetables for a perfect balance of flavors.",
+                    features: ["Crispy Texture", "Unique Flavor", "Spicy Option", "Crowd Favorite"]
+                }
+            ],
+            main: [
+                {
+                    id: 5,
+                    title: "Filet Mignon",
+                    price: "$34.95",
+                    image: "https://images.unsplash.com/photo-1607116667981-ffbcba0d94d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "8oz grass-fed beef with truffle mashed potatoes",
+                    longDesc: "Premium 8oz grass-fed filet mignon cooked to your preference, served with truffle-infused mashed potatoes and seasonal vegetables. Topped with a red wine reduction sauce and crispy fried onions for added texture.",
+                    features: ["Premium Cut", "Grass-Fed Beef", "Gluten-Free Option", "Signature Dish"]
+                },
+                {
+                    id: 6,
+                    title: "Pan-Seared Salmon",
+                    price: "$26.50",
+                    image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Wild-caught salmon with lemon-dill sauce and asparagus",
+                    longDesc: "Wild-caught salmon fillet pan-seared to perfection with crispy skin, served on a bed of lemon-dill sauce. Accompanied by roasted asparagus and quinoa pilaf for a healthy, satisfying meal.",
+                    features: ["Wild-Caught", "Omega-3 Rich", "Heart Healthy", "Low Carb Option"]
+                },
+                {
+                    id: 7,
+                    title: "Mushroom Risotto",
+                    price: "$22.95",
+                    image: "https://images.unsplash.com/photo-1608214588997-55d0d939d7c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Creamy Arborio rice with wild mushrooms and parmesan",
+                    longDesc: "Creamy Arborio rice cooked slowly with a variety of wild mushrooms, white wine, and vegetable broth. Finished with Parmesan cheese, fresh herbs, and a touch of truffle oil for an earthy, comforting dish.",
+                    features: ["Vegetarian", "Creamy Texture", "Comfort Food", "Wine Pairing"]
+                },
+                {
+                    id: 8,
+                    title: "Herb-Crusted Rack of Lamb",
+                    price: "$38.95",
+                    image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "New Zealand lamb with mint jus and roasted potatoes",
+                    longDesc: "Tender rack of lamb coated in a fragrant herb crust with rosemary, thyme, and Dijon mustard. Served with roasted baby potatoes, seasonal vegetables, and a refreshing mint jus that complements the rich flavor of the lamb.",
+                    features: ["Premium Cut", "Herb Crust", "Wine Pairing", "Special Occasion"]
+                }
+            ],
+            drinks: [
+                {
+                    id: 9,
+                    title: "Signature Cocktail",
+                    price: "$14.00",
+                    image: "https://images.unsplash.com/photo-1551751299-1b51cab2694c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Gastronomique special blend with premium spirits",
+                    longDesc: "Our signature cocktail features premium gin infused with cucumber and basil, shaken with fresh lime juice and simple syrup. Topped with sparkling wine and garnished with a cucumber ribbon and fresh basil leaf.",
+                    features: ["Signature Drink", "Refreshing", "Premium Spirits", "Seasonal Ingredients"]
+                },
+                {
+                    id: 10,
+                    title: "Wine Selection",
+                    price: "$9.00 - $18.00",
+                    image: "https://images.unsplash.com/photo-1550537687-c91072c4792d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Curated wines from renowned vineyards worldwide",
+                    longDesc: "Our sommelier has carefully selected wines from renowned vineyards around the world. Choose from our rotating selection of reds, whites, and rosés, with options available by the glass or bottle. Ask your server for pairing recommendations.",
+                    features: ["Curated Selection", "Global Vineyards", "Sommelier Choice", "Food Pairings"]
+                },
+                {
+                    id: 11,
+                    title: "Craft Beer Flight",
+                    price: "$16.00",
+                    image: "https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Four 5oz samples of local craft brews",
+                    longDesc: "Experience the best of our local craft beer scene with this flight featuring four 5oz samples. Changes seasonally to showcase new releases and brewery specialties. Currently featuring an IPA, stout, sour, and pilsner from local artisans.",
+                    features: ["Local Breweries", "Seasonal Rotation", "Tasting Experience", "Shareable"]
+                },
+                {
+                    id: 12,
+                    title: "Artisan Coffee",
+                    price: "$6.50",
+                    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Specialty brews with optional spirits",
+                    longDesc: "Our barista crafts exceptional coffee using single-origin beans roasted locally. Choose from pour-over, French press, or espresso preparations. Add a shot of premium liqueur for an after-dinner treat. Served with house-made biscotti.",
+                    features: ["Single-Origin Beans", "Specialty Preparation", "Spirit Additions", "Dessert Pairing"]
+                }
+            ],
+            desserts: [
+                {
+                    id: 13,
+                    title: "Chocolate Soufflé",
+                    price: "$12.95",
+                    image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Warm chocolate soufflé with vanilla ice cream",
+                    longDesc: "Our famous chocolate soufflé is baked to order, resulting in a light, airy texture with a rich molten center. Served warm with a scoop of vanilla bean ice cream and a dusting of powdered sugar. Requires 20 minutes preparation time.",
+                    features: ["Baked to Order", "Rich Chocolate", "Vanilla Bean Ice Cream", "Signature Dessert"]
+                },
+                {
+                    id: 14,
+                    title: "Berry Panna Cotta",
+                    price: "$10.50",
+                    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Silky vanilla panna cotta with fresh berry compote",
+                    longDesc: "Silky smooth vanilla bean panna cotta made with cream and just enough gelatin to hold its shape. Topped with a vibrant mixed berry compote and garnished with fresh mint. A light yet satisfying end to your meal.",
+                    features: ["Gluten-Free", "Light Dessert", "Fresh Berries", "Vegetarian"]
+                },
+                {
+                    id: 15,
+                    title: "Crème Brûlée",
+                    price: "$9.95",
+                    image: "https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Classic vanilla custard with caramelized sugar crust",
+                    longDesc: "Our classic crème brûlée features a rich vanilla bean custard base topped with a perfectly caramelized sugar crust. Served with seasonal berries and a delicate shortbread cookie. Crack through the crisp topping to reveal the creamy custard beneath.",
+                    features: ["Classic Dessert", "Caramelized Sugar", "Vanilla Bean", "Gluten-Free Option"]
+                },
+                {
+                    id: 16,
+                    title: "Tiramisu",
+                    price: "$11.50",
+                    image: "https://images.unsplash.com/photo-1571877227200-a0d98e0a6d2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80",
+                    shortDesc: "Traditional Italian dessert with espresso and mascarpone",
+                    longDesc: "Our authentic tiramisu features layers of espresso-soaked ladyfingers and light, creamy mascarpone filling. Dusted with cocoa powder and finished with chocolate shavings. A coffee lover's dream dessert.",
+                    features: ["Authentic Recipe", "Espresso Infused", "Mascarpone Cream", "Coffee Pairing"]
+                }
+            ]
+        };
+
+        // DOM elements
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const menuGrid = document.querySelector('.menu-grid');
+        const popup = document.querySelector('.popup');
+        const closeBtn = document.querySelector('.close-btn');
+        const popupImg = document.getElementById('popup-img');
+        const popupTitle = document.getElementById('popup-title');
+        const popupPrice = document.getElementById('popup-price');
+        const popupDesc = document.getElementById('popup-desc');
+        const popupFeatures = document.getElementById('popup-features');
+
+        // Initialize with starters category
+        showCategory('starters');
+
+        // Tab click event
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Show the selected category
+                const category = button.getAttribute('data-category');
+                showCategory(category);
+            });
+        });
+
+        // Show items for a specific category
+        function showCategory(category) {
+            menuGrid.innerHTML = '';
+            
+            menuData[category].forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.className = 'menu-item';
+                menuItem.innerHTML = `
+                    <div class="menu-img">
+                        <img src="${item.image}" alt="${item.title}">
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-title">
+                            <h3>${item.title}</h3>
+                            <span class="price">${item.price}</span>
+                        </div>
+                        <p class="menu-desc">${item.shortDesc}</p>
+                        <button class="more-btn" data-id="${item.id}">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                `;
+                menuGrid.appendChild(menuItem);
+            });
+            
+            // Add event listeners to the "More" buttons
+            document.querySelectorAll('.more-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    const item = findItemById(id);
+                    openPopup(item);
+                });
+            });
+        }
+
+        // Find menu item by ID
+        function findItemById(id) {
+            for (const category in menuData) {
+                const item = menuData[category].find(item => item.id == id);
+                if (item) return item;
+            }
+            return null;
+        }
+
+        // Open popup with item details
+        function openPopup(item) {
+            popupImg.src = item.image;
+            popupImg.alt = item.title;
+            popupTitle.textContent = item.title;
+            popupPrice.textContent = item.price;
+            popupDesc.textContent = item.longDesc;
+            
+            // Populate features
+            popupFeatures.innerHTML = '';
+            item.features.forEach(feature => {
+                const featureItem = document.createElement('div');
+                featureItem.className = 'feature-item';
+                featureItem.innerHTML = `
+                    <i class="fas fa-check feature-icon"></i>
+                    <span>${feature}</span>
+                `;
+                popupFeatures.appendChild(featureItem);
+            });
+            
+            // Show popup
+            popup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close popup
+        closeBtn.addEventListener('click', closePopup);
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) closePopup();
+        });
+
+        function closePopup() {
+            popup.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && popup.classList.contains('active')) {
+                closePopup();
+            }
+        });
+    </script>
+</body>
+</html>
